@@ -4,18 +4,25 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
     /**
      * @Route("/", name="homepage")
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
+        $translator = $this->get('translator');
+
+        $translator->setLocale('en');
+        $english = $translator->trans('Symfony is great');
+
+        $translator->setLocale('fr');
+        $french = $translator->trans('Symfony is great');
+
+        return $this->render('confirm/20338.html.twig', [
+            'english' => $english,
+            'french' => $french
         ]);
     }
 }
